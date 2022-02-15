@@ -29,13 +29,14 @@ public:
     ~MainWindow();
 
 signals:
-    void methodChanged(int methodIndex); // signal raised when the backup method is altered between all/selective cases
+    void methodControlChanged(int methodIndex); // raised when the backup method UI control is updated. Helps to chain actions to update the ui state (hide/show other controls etc.)
     void actionChanged(SourceDetails::ActionType action);
     //void backupNameChanged(QString backupName); // signal raised when the backup name is changed. Be it set to another value or cleared altogether.
     void newBackupName(QString backupName); // there is a new backup name established!
     void PleaseQuit();
     void friendlyNameEdited(); // there is new content in activeBackup.backupDetails.friendlyName
     void systemdUnitChanged(QString unitName);
+    void modelUpdated(BackupModel::ValueType valueType = BackupModel::unset);
 
 private slots:
 
@@ -43,6 +44,7 @@ private slots:
     void on_actionChanged(SourceDetails::ActionType action);
     void onNewBackupName(QString backupName);
     void onSystemdUnitChanged(QString newUnitName);
+    void onModelUpdated(BackupModel::ValueType valueType);
 
 
     void on_pushButton_clicked();
@@ -120,6 +122,10 @@ private slots:
 
     void on_toolButtonRun_clicked();
 
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -132,9 +138,9 @@ private:
 
     void loadTask(QString taskId);
     bool loadPersisted(QString backupName, BackupModel& persisted);
-    QStandardItem* appendSource(SourceDetails* sourceDetails);
+    QStandardItem* appendSource(BackupModel::SourceDetailsIndex sourceDetails);
     void collectUIControls(BackupModel& persisted);
-    void initUIControls(const BackupModel& persisted);
+    void initUIControls(BackupModel& persisted);
 
     void applyChanges();
     void refreshBasePaths(QString current);

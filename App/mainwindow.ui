@@ -913,6 +913,20 @@
        </spacer>
       </item>
       <item>
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="text">
+         <string>keep copy</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="text">
+         <string>check equal</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QToolButton" name="toolButtonRun">
         <property name="minimumSize">
          <size>

@@ -11,6 +11,18 @@ SourceDetails::SourceDetails() :
 SourceDetails::~SourceDetails() {
 }
 
+bool BackupModel::operator==(const BackupModel& other) const {
+    return (allSourceDetails == other.allSourceDetails) &&
+            (backupDetails == other.backupDetails);
+
+}
+
+BackupModel& BackupModel::operator=(const BackupModel& other) {
+    backupDetails = other.backupDetails;
+    allSourceDetails = other.allSourceDetails;
+    allSourceDetails.detach();
+}
+
 QDataStream& operator<<(QDataStream& s, const SourceDetails& item) {
     s << (qint32)item.backupType
       << (qint32)item.backupDepth
